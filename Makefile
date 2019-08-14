@@ -5,17 +5,17 @@ ifeq ($(PROD_PORT),)
 endif
 
 build:
-	sudo  docker build . -t test_api
+	docker build . -t test_api
 
 run:
-	sudo  docker run --rm -d --name test_api_v1 -p $(PORT):7831 -it test_api
+	docker run --rm -d --name test_api_v1 -p $(PORT):7831 -it test_api
 
 
 run_tests:
-	sudo docker exec -ti test_api_v1 tarantool /opt/tarantool/api_test.lua
+	docker exec -ti test_api_v1 tarantool /opt/tarantool/api_test.lua
 
 stop: 
-	sudo docker stop test_api_v1
+	docker stop test_api_v1
 
 get_log:
-	sudo docker exec -ti test_api_v1 cat ./server.log
+	docker exec -ti test_api_v1 cat ./server.log
